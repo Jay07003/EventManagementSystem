@@ -33,14 +33,14 @@
             
             let empsal ="<table><thead><tr><th>Name</th><th>Salary > 50k</th></tr></thead><tbody><tr>";
             let empjoin = "<table><thead><tr><th>Name</th><th>DateofJoining in december</th></tr></thead><tbody><tr>";
-            let box2 = "<table><thead><tr><th>Name</th><th>Address</th><th>Salary</th><th>DateofJoining</th></tr></thead>";
-            let box3 = "<tbody>";
+            let box1 = "<table><thead><tr><th>Name</th><th>Address</th><th>Salary</th><th>DateofJoining</th></tr></thead>";
+            let box2 = "<tbody>";
             for (let i of data) {
-                box3 = box3 + "<tr>"
+                box2 = box2 + "<tr>"
                 for (let j in i) {
-                    box3 = box3 + `<td>${i[j]}</td>`;
+                    box2 = box2 + `<td>${i[j]}</td>`;
                 }
-                box3 = box3 + "</tr>"
+                box2 = box2 + "</tr>"
                 if (i["Salary"] > 50000) {
                     empsal = empsal + `<td>${i["Name"]}</td>`;
                     empsal = empsal + `<td>${i["Salary"]}</td>`;
@@ -53,9 +53,9 @@
                 empsal=empsal+"</tr>"
             }
             document.querySelector("#list").innerHTML = empsal +"</tbody></table><br><br>"+ empjoin+"</tbody></table>";
-            box3 = box3 + "</tbody>";
+            box2 = box2 + "</tbody>";
             
-            document.querySelector("#box").innerHTML = box2 + box3 + "</table>";
+            document.querySelector("#box").innerHTML = box1 + box2 + "</table>";
         }
         gg()
     </script>
