@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch</title>
+    <style>
+      table {
+        border: 2px solid;
+        border-collapse: collapse;
+        border-radius: 15%;
+        padding: 5px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 10px;
+      }
+      #list{
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <div id="list"></div>
+    <script>
+        async function gg() {
+            let a = await fetch("https://rawcdn.githack.com/kmitprojectschool/sem12022/788c820e40a750fecb30433c8d346457b7859abc/employee.json")
+            a = await a.json()
+            data = a["Employees"]
+            
+            let empsal ="<table><thead><tr><th>Name</th><th>Salary > 50k</th></tr></thead><tbody><tr>";
+            let empjoin = "<table><thead><tr><th>Name</th><th>DateofJoining in december</th></tr></thead><tbody><tr>";
+            let box2 = "<table><thead><tr><th>Name</th><th>Address</th><th>Salary</th><th>DateofJoining</th></tr></thead>";
+            let box3 = "<tbody>";
+            for (let i of data) {
+                box3 = box3 + "<tr>"
+                for (let j in i) {
+                    box3 = box3 + `<td>${i[j]}</td>`;
+                }
+                box3 = box3 + "</tr>"
+                if (i["Salary"] > 50000) {
+                    empsal = empsal + `<td>${i["Name"]}</td>`;
+                    empsal = empsal + `<td>${i["Salary"]}</td>`;
+                }
+                if (i["DateOfJoining"].split("-")[1] == "12") {
+                    empjoin = empjoin + `<td>${i["Name"]}</td>`;
+                    empjoin = empjoin + `<td>${i["DateOfJoining"]}</td>`;
+                }
+                empjoin=empjoin+"</tr>"
+                empsal=empsal+"</tr>"
+            }
+            document.querySelector("#list").innerHTML = empsal +"</tbody></table><br><br>"+ empjoin+"</tbody></table>";
+            box3 = box3 + "</tbody>";
+            
+            document.querySelector("#box").innerHTML = box2 + box3 + "</table>";
+        }
+        gg()
+    </script>
+  </body>
+</html>
